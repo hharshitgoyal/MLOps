@@ -1,23 +1,20 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim-buster
+# Create the user that will run the app
+RUN adduser --disabled-password --gecos '' ml-api-user
 
-# Set the working directory to /app
-WORKDIR /app
+WORKDIR /opt/house-prices-api
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+ARG PIP_EXTRA_INDEX_URL
 
-#installing node dependency
-Run pip install nodejs
+# Install requirements, including from Gemfury
+ADD ./house-prices-api /opt/house-prices-api/
+RUN pip install --upgrade pip
+RUN pip install -r /opt/house-prices-api/requirements.txt
 
-# Install dependencies using tox
-RUN pip install tox && tox
+RUN chmod +x /opt/house-prices-api/run.sh
+RUN chown -R ml-api-user:ml-api-user ./
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
+USER ml-api-user
 
-# Define environment variable
-ENV NAME World
+EXPOSE 8001
 
-# Run app.py when the container launches
-CMD ["python", "app.py"]
+CMD ["bash", "./run.sh"]
