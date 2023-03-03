@@ -37,7 +37,7 @@ jobs:
             pip install --user tox
 
       - name: Run Backend server
-        run: tox run -r run
+        run: tox run -e run
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
