@@ -29,8 +29,8 @@ jobs:
       
       - name: Install dependencies
 #        run: pip install -r requirements.txt
-        add: ./house-prices-api /opt/house-prices-api/
-        run: pip install -r /opt/house-prices-api/requirements.txt
+#        add: ./house-prices-api /opt/house-prices-api/
+        run: pip install -r house-prices-api/requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
