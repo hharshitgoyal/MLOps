@@ -35,6 +35,9 @@ jobs:
       - name: Install tox
         run: |
             pip install --user tox
+
+      - name: Run Backend server
+        run: house-prices-api/ tox run -r run
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
